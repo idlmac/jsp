@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>html/get.html</title>
+</head>
+<body>
+	<h3>GET 방식 요청</h3>
+	<form action="../addMember" method='get'>
+		UserName : <input type="text" name="user_name"><br>
+		Password : <input type="password" name="user_pass"><br>
+		Role : <select name="role">
+			   	<option value="0">관리자</option>
+			   	<option value="1">사용자</option>
+			   </select><br>
+		<input type="submit" value="Send">
+	</form>
+	
+	<script>
+		let frm = document.querySelector('form');
+		let name = document.querySelector("input[name='user_name']");
+		let pw = document.querySelector("input[name='user_pass']");
+		let role = document.querySelector('select[name="role"]');
+		frm.addEventListener('submit', function(e) {
+			e.preventDefault();
+			if(name.value == "" || pw.value == "" || role.value == "") {
+				alert("값이 비었습니다");
+				return;
+			}
+			this.submit();
+		})
+		console.log(frm)
+	</script>
+</body>
+</html>
