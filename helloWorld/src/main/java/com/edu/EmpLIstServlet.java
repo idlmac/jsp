@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.edu.common.Employee;
+import com.edu.common.empDAO;
+
 @WebServlet("/empList")
 public class EmpLIstServlet extends HttpServlet{
 	

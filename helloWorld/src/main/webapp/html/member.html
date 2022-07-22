@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>infomation</title>
+</head>
+
+<body>
+  <h3>회원정보</h3>
+  <form action="queryTest" method="post">
+    ID : <input type="text" name="id"><br>
+    비밀번호 : <input type="password" name="pw"><br>
+    이름 : <input type="text" name="name"><br>
+    취미 : <input type="checkbox" name="hobby" value="swimming" checked>수영
+    <input type="checkbox" name="hobby" value="climbing">등산
+    <input type="checkbox" name="hobby" value="soccer">축구
+    <input type="checkbox" name="hobby" value="trip">여행<br>
+    성별 : <input type="radio" name="gender" value="male">남성
+    <input type="radio" name="gender" value="female">여성<br>
+    종교 <select name="religion">
+      <option value="christianity">기독교</option>
+      <option value="buddhism">불교</option>
+      <option value="chtholicism">천주교</option>
+      <option value="atheism" selected>무교</option>
+    </select><br>
+    자기소개 : <br>
+    <textarea name="introduction" cols="30" rows="10"></textarea><br>
+    <input type="submit" value="전송">
+    <input type="reset" value="초기화">
+  </form>
+  <script>
+    let str =
+      'id=djdwnd&pw=11&name=%EC%97%84%EC%97%89%EC%A4%91&hobby=swimming&gender=male&religion=atheism&introduction=';
+
+
+    function getParameter() {
+      let param = 'name';
+      let findIndex = str.indexOf(param);
+      let sliceIndex = str.slice(findIndex,str.length);
+      let value = sliceIndex.indexOf('&');
+      let key = str.slice(findIndex+param.length+1, value+findIndex);
+      console.log(decodeURI(key))
+
+      return 'result';
+    }
+    getParameter();
+  </script>
+</body>
+
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>word.html</title>
+  <style>
+    #show {
+      width: 340px;
+      height: 360px;
+      background-color: rgb(255, 168, 249);
+    }
+
+    #show>span {
+      display: inline-block;
+      width: 100px;
+      height: 25px;
+      background-color: rgb(36, 255, 255);
+      border: 1px solid black;
+      padding: 2px;
+      margin: 2px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <input type="text" id="userInput">
+  <div id="show"></div>
+
+  <script>
+    let word =
+      `Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod enim quis, ipsam sunt nam mollitia doloribus voluptatum! Dolor, animi expedita amet dignissimos, velit nihil veniam dicta consequuntur laboriosam consequatur et.`;
+
+    let wordList = word.split(' ');
+    let show = document.getElementById('show');
+    for (let word of wordList) {
+      let span = document.createElement('span');
+      span.innerHTML = word; // <span>Lorem</span>
+      show.append(span);
+    }
+
+    let words = document.querySelector('div#show>span')
+    let inputValue = document.querySelector('#userInput');
+    words.onchange = wordCheck;
+    inputValue.onchange = inputCheck;
+
+    function wordCheck() {
+      if (words.value == inputValue.value) {
+        disa.value.remove;
+      }
+    }
+
+    wordCheck();
+  </script>
+</body>
+
+</html>

@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.edu.common.empDAO;
+
 @WebServlet("/addMember")
 public class addMembersServ extends HttpServlet{
 	@Override
@@ -19,18 +21,26 @@ public class addMembersServ extends HttpServlet{
 		
 		empDAO dao = new empDAO();
 		
+		resp.setContentType("text/html;charset=UTF-8");
+		
 		//get : 수정, post : 입력
 		//DB입력
+		boolean isTrue = false;
 		if(req.getMethod().toUpperCase().equals("GET")) {
-			dao.updateMember(name, pass, role);
+			isTrue = dao.updateMember(name, pass, role);
 		} else {
-			dao.insertMember(name, pass, role);
+			isTrue = dao.insertMember(name, pass, role);
+		}
+		
+		if(isTrue) {
+			resp.getWriter().print("성공");
+		}else {
+			resp.getWriter().print("실패");			
 		}
 		
 		// DB 입력
 		dao.insertMember(name, pass, role);
 		
-		resp.getWriter().print("complete");
 		
 	}
 	
