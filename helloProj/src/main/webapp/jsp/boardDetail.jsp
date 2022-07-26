@@ -27,6 +27,15 @@
 			<tr><th>조회수</th><td><%=vo.getCnt()%></td></tr>
 		</tbody>
 	</table>
-	<p><a href="boardList.jsp">뒤로 가기</a></p>
+	<%
+		String loginId = (String) session.getAttribute("loginId");
+		if(loginId != null && loginId.equals(vo.getWriter())) {
+	%>
+	<button onclick="location.href='updateForm.jsp?id=<%=vo.getBoardId()%>'">수정하기</button><br><br>
+	<button onclick="location.href='deleteForm.jsp?id=<%=vo.getBoardId()%>'">삭제하기</button><br><br>
+	<%
+		}
+	%>
+	<button onclick="location.href='boardList.jsp'">뒤로가기</button><br>
 </body>
 </html>

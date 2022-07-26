@@ -18,7 +18,7 @@ public class BoardDAO extends DAO {
 			pstmt.setString(3, vo.getWriter());
 
 			int r = pstmt.executeUpdate();
-			System.out.println(r + "건 입력");
+			System.out.println(r + "건 등록");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -83,6 +83,7 @@ public class BoardDAO extends DAO {
 		return null;
 	}
 
+	// 조회수
 	public void setCnt(int boardId) {
 		String sql = "update board set cnt =cnt+1 where board_id =?";
 		connect();
@@ -96,5 +97,73 @@ public class BoardDAO extends DAO {
 		} finally {
 			disconnect();
 		}
+	}
+
+	// 글내용 수정
+	public void updateBoard(BoardVO vo) {
+		String sql = "update board set title=?, content=? where board_id=?";
+		connect();
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, vo.getTitle());
+			pstmt.setString(2, vo.getContent());
+			pstmt.setInt(3, vo.getBoardId());
+
+			int r = pstmt.executeUpdate();
+
+			System.out.println(r + "건 수정");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+	}
+
+	// 삭제
+	public void deleteBoard(BoardVO vo) {
+		String sql = "delete from board where board_id=?";
+		connect();
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, vo.getBoardId());
+
+			int r = pstmt.executeUpdate();
+
+			System.out.println(r + "건 삭제");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+	}
+
+	// 로그인체크
+
+	public UserVO loginCheck(String userId, String userPw) {
+		String sql = "select * from users where id=? and passwd=?";
+		connect();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, userPw);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				UserVO vo = new UserVO();
+				vo.setUserId(rs.getString("id"));
+				vo.setUserPw(rs.getString("passwd"));
+				vo.setUserName(rs.getString("name"));
+
+				return vo;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return null;
 	}
 }
