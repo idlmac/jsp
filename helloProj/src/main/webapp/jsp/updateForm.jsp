@@ -16,12 +16,12 @@
 	BoardVO vo = dao.getBoard(Integer.parseInt(id));
 
 	%>
-	<c:set var="boardId" value="${vo.boardId }"></c:set>
-	<c:set var="title" value="${vo.title }"></c:set>
-	<c:set var="content" value="${vo.content }"></c:set>
-	<c:set var="writer" value="${vo.writer }"></c:set>
-	<c:set var="createDate" value="${vo.createDate }"></c:set>
-	<c:set var="cnt" value="${vo.cnt }"></c:set>
+	<c:set var="boardId" value="<%=vo.getBoardId() %>"></c:set>
+	<c:set var="title" value="<%=vo.getTitle() %>"></c:set>
+	<c:set var="content" value="<%=vo.getContent() %>"></c:set>
+	<c:set var="writer" value="<%=vo.getWriter() %>"></c:set>
+	<c:set var="createDate" value="<%=vo.getCreateDate() %>"></c:set>
+	<c:set var="cnt" value="<%=vo.getCnt() %>"></c:set>
 	
 	
 	<form action="update.jsp">
