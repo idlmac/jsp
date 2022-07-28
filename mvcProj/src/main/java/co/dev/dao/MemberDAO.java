@@ -87,7 +87,7 @@ public class MemberDAO {
 		}
 		return list;
 	}
-	
+
 	// 단건조회(id)
 	public MemberVO searchMember(String id) {
 		String sql = "select * from member where id=?";
@@ -95,38 +95,60 @@ public class MemberDAO {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
-			
+
 			rs = pstmt.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				MemberVO vo = new MemberVO();
 				vo.setId(id);
 				vo.setPasswd(rs.getString("passwd"));
 				vo.setName(rs.getString("name"));
 				vo.setMail(rs.getString("mail"));
-				
+
 				return vo;
 			}
-		
+
 		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			disconnect();
-		}
-		return null;
-	}
-	
-	//삭제
-	public MemberVO deleteMember(MemberVO vo) {
-		String sql = "delete from member where id=?";
-		connect();
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			disconnect();
 		}
 		return null;
+	}
+
+	// 수정
+	public void updateMember(MemberVO vo) {
+		String sql = "update member set name=?, passwd=?, mail=? where id =?";
+		connect();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getName());
+			pstmt.setString(2, vo.getPasswd());
+			pstmt.setString(3, vo.getMail());
+			pstmt.setString(4, vo.getId());
+
+			int r = pstmt.executeUpdate();
+			System.out.println(r + "건 수정");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+	}
+
+	// 삭제
+	public void deleteMember(MemberVO vo) {
+		String sql = "delete from member where id=?";
+		connect();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getId());
+
+			int r = pstmt.executeUpdate();
+			System.out.println(r + "건 삭제");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
 	}
 }

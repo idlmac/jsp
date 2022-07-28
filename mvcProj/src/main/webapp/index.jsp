@@ -15,6 +15,9 @@
 	
 	<input type="button" onclick="location.href='memberView/memberUpdate.jsp'" value="회원수정"> |
 	
+	<input type="button" onclick="location.href='memberView/memberDelete.jsp'" value="회원삭제"> |	
+		
 	<input type="button" onclick="location.href='memberList.do'" value="회원목록">	
+	
 </body>
 </html>
