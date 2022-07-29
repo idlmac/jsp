@@ -1,5 +1,5 @@
-<%@page import="co.edu.common.MemberVO"%>
-<%@page import="co.edu.common.MemberService"%>
+<%@page import="com.dev.controller.MemberVO"%>
+<%@page import="com.dev.controller.MemberService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%

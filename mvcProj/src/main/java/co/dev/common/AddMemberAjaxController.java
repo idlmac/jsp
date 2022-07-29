@@ -1,16 +1,24 @@
 package co.dev.common;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import co.dev.service.MemberService;
 import co.dev.vo.MemberVO;
 
-public class MemberDeleteController implements Controller {
+public class AddMemberAjaxController implements Controller {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) {
-		// 파라미터
+		MemberService service = MemberService.getInstance();
+		resp.setContentType("text/json;charset=UTF-8");
+		// 회원정보 등록 -> json 값 반환
+		
 		String id = req.getParameter("id");
 		String pw = req.getParameter("passwd");
 		String nm = req.getParameter("name");
@@ -21,14 +29,16 @@ public class MemberDeleteController implements Controller {
 		vo.setPasswd(pw);
 		vo.setName(nm);
 		vo.setMail(ml);
+
+		service.addMember(vo);
 		
-		MemberService service = MemberService.getInstance();
-		service.removeMember(id);
-		
-		// 공유 : vo
-		req.setAttribute("member", vo);
-		
-		Utils.forward(req, resp, "memberResult/memberDeleteOutput.jsp");
+		// json 반환
+		Gson gson = new GsonBuilder().create();
+		try {
+			resp.getWriter().print(gson.toJson(vo));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
